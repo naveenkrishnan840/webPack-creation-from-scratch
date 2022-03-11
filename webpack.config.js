@@ -11,6 +11,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
+  devtools: 'inline-source-map',
   plugins: [
     new htmlWebPackPlugin({
       title: 'Output Management',
