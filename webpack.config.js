@@ -7,17 +7,33 @@ module.exports = {
   entry: './src/index.js',
   output: {
     // filename: 'main.js',
-    filename: 'bundle.js',
+    // filename: 'bundle.js',
+    filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
-  devtools: 'inline-source-map',
+  devtool: 'inline-source-map',
   plugins: [
     new htmlWebPackPlugin({
       title: 'Output Management',
     }),
     // new webpackManifestPlugin('./src/index.js'),
   ],
+  devServer: {
+    static: './dist',
+  },
+  optimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
+  },
   module: {
     rules: [
       {
